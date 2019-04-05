@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.happy.dao.IStudentDAO">
+    <resultMap id="StudentMapper" type="Student">
+        <id column="sid" property="sid"></id>
+        <result column="sname" property="snamebak"></result>
+    </resultMap>
+    <!--sql片段-->
+    <sql id="include">sid,sname</sql>
+    <select id="findAll" resultType="Student">
+        select <include refid="include"></include> from student
+    </select>
+    <!--02.根据主键查询单个对象-->
+    <select id="findById" resultType="Student">
+        select <include refid="include"></include> from student where sid=#{sid}
+    </select>
+    <!--03.添加学生-->
+    <insert id="addStudent">
+        insert into Student(sname,gid) values(#{sname},#{gid})
+    </insert>
+    <!--03.修改学生-->
+    <update id="updateStudent">
+        update Student set sname=#{sname} where sid=#{sid}
+    </update>
+    <!--05.删除学生-->
+    <delete id="deleteStudent">
+        delete from  Student where sid=#{sid}
+    </delete>
+    <!--06.添加后返回最大值-->
+    <insert id="addStudentAndReturnMaxValue">
+        insert into Student(sname,gid) values(#{sname},#{gid})
+        <selectKey keyProperty="sid" resultType="int">
+            select @@IDENTITY
+        </selectKey>
+    </insert>
+    <!--07.模糊查询-->
+    <select id="likeSelect" resultType="Student">
+        select * from Student
+        where sname like '%${ssname}%' and address like '%${ssaddress}%'
+    </select>
+    <!--08.多条件查询condition-->
+    <select id="selectByCondition" resultType="Student">
+        select * from Student
+        where sname like '%' #{sname} '%' and address like '%' #{address} '%'
+    </select>
+    <!--09.多条件查询map-->
+    <select id="selectByMap" resultType="Student">
+        select * from Student
+        where sname like '%' #{mysname} '%' and address like '%' #{myaddress} '%'
+    </select>
+    <!--10.智能标签if+where-->
+    <select id="ifTag" resultType="Student">
+        select * from Student
+        <where>
+            <if test="sname!=null">
+               and   sname=#{sname}
+            </if>
+        </where>
+    </select>
+</mapper>

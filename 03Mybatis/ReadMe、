@@ -1,0 +1,45 @@
+2019年4月2日11:09:54
+1.框架：
+工具类：将字节码文件以jar形式体现，我们引入到lib下，直接使用，主要使用的是API（接口，抽象类和实现类）
+自己打过jar包，自己的jar包。。。。小巧玲珑 功能单一
+T14：数据库里有10张表 ，entity 10个实例类   dao 10个接口  impl dao层实现类
+                       service 10个接口   impl实现类   10个页面jsp
+西二旗：
+动软卓越：：：：：：：李天平
+jar包里面 N个后缀是.class文件
+
+
+核心技术：XML解析
+         反射机制
+maven标准目录
+main
+   java
+   resources
+test
+   java
+   resources
+
+2.MyBaits第一个入门案例
+   2.1依赖引入
+   2.2书写大配置文件
+
+   2.3定义pojo  entity  /   domain   /pojo    / model 实体层
+   2.4定义接口
+   2.5定义映射文件
+   2.6接口实现类
+   2.7测试类
+3.session.getMapper()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
