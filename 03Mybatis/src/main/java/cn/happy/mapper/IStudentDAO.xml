@@ -57,6 +57,75 @@
             <if test="sname!=null">
                and   sname=#{sname}
             </if>
+            <if test="address!=null">
+                and   address=#{address}
+            </if>
         </where>
     </select>
+    <!--11.智能标签choose+where-->
+    <select id="chooseTag" resultType="Student">
+        select * from Student
+        <where>
+            <choose>
+                <when test="sname!=null">
+                    and  sname=#{sname}
+                </when>
+            </choose>
+            <choose>
+                <when test="address!=null">
+                    and  address=#{address}
+                </when>
+            </choose>
+        </where>
+    </select>
+    <!--12.ForEach array-->
+    <select id="forEachTag" resultType="Student">
+        select * from Student
+        <if test="array.length>0">
+            where sid IN
+            <foreach collection="array" open="(" close=")" separator="," item="myid">
+                #{myid}
+            </foreach>
+        </if>
+    </select>
+
+    <!--13.ForEach list-->
+    <select id="forEachTagList" resultType="Student">
+        select * from Student
+        <if test="list.size>0">
+            where sid IN
+            <foreach collection="list" open="(" close=")" separator="," item="myid">
+                #{myid}
+            </foreach>
+        </if>
+    </select>
+
+    <!--14.ForEach list-->
+    <select id="forEachTagListStudent" resultType="Student">
+        select * from Student
+        <if test="list.size>0">
+            where sid IN
+            <foreach collection="list" open="(" close=")" separator="," item="stu">
+                #{stu.sid}
+            </foreach>
+        </if>
+    </select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

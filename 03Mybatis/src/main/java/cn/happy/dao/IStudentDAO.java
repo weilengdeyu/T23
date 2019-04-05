@@ -34,4 +34,12 @@ public interface IStudentDAO {
     public List<Student> selectByMap(Map<String,Object> map);
     //10.智能标签if+where 通过学生姓名查询学生信息
     public List<Student> ifTag(Student stu);
+    //11.智能标签choose+where 通过学生姓名查询学生信息
+    public List<Student> chooseTag(Student stu);
+    //12.智能标签forEach 通过学生编号数组  查询学生信息
+    public List<Student> forEachTag(int[] ids);
+    //12.智能标签forEach 通过学生编号List Integer  查询学生信息
+    public List<Student> forEachTagList(List<Integer> list);
+    //12.智能标签forEach 通过学生编号List Student  查询学生信息
+    public List<Student> forEachTagListStudent(List<Student> list);
 }
