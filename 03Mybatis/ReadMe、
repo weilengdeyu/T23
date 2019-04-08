@@ -29,8 +29,17 @@ test
    2.6接口实现类
    2.7测试类
 3.session.getMapper()
+4.工具类
+  API
+  SQLSessionFactoryBuilder
+  SQLSessionFactory：重量级的API  ，在整个程序中有一份就够了。
+  SqlSession:和DB进行交互的一个入口    CURD  基于他来操作   看成是   Connection +++事务的集合
 
 
+其实增删改都是修改，Mybatis这款框架底层对insert和delete的处理
+都是通过update实现的。
+
+5.
 
 
 

@@ -33,6 +33,7 @@ public class StudentDAOImpl  {
 
         //04.调度session执行SQL
         List<Student> list = session.selectList("findAll");
+
         return list;
     }
 

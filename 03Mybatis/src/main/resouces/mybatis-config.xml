@@ -8,7 +8,7 @@
     <!--关联properties-->
     <properties resource="jdbc.properties"></properties>
     <settings>
-        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <setting name="autoMappingBehavior" value="FULL"/>
     </settings>
     <typeAliases>
        <!-- <typeAlias type="cn.happy.entity.Student" alias="Student"></typeAlias>
@@ -36,7 +36,11 @@
     </environments>
     <mappers>
         <!--关联小配置-->
-        <mapper resource="cn/happy/mapper/IStudentDAO.xml"/>
+        <package name="cn.happy.*"></package>
+     <!--   <mapper resource="cn/happy/mapper/IStudentDAO.xml"/>
         <mapper resource="cn/happy/mapper/IResultDAO.xml"/>
+        <mapper resource="cn/happy/mapper/IDeptDAO.xml"/>
+        <mapper resource="cn/happy/mapper/IEmpDAO.xml"/>
+        <mapper resource="cn/happy/mapper/ICategoryDAO.xml"/>-->
     </mappers>
 </configuration>

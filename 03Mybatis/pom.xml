@@ -59,6 +59,11 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+
+
+
+
+
     </dependencies>
      <!--构建相关的-->
     <build>
@@ -105,4 +110,5 @@
             </plugins>
         </pluginManagement>
     </build>
+
 </project>

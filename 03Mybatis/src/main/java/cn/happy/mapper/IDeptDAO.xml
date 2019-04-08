@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.happy.dao.IDeptDAO">
+    <resultMap id="DeptMapper" type="Dept">
+        <id column="deptno" property="deptno"></id>
+    <!--    <result column="deptName" property="deptname"></result>-->
+        <collection property="emps" ofType="Emp">
+            <id column="empno" property="empno"></id>
+            <result column="empname" property="empname"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="DeptMultiMapper" type="Dept">
+        <id column="deptno" property="deptno"></id>
+        <result column="deptName" property="deptname"></result>
+        <!--
+          cloumn:DB中的列名
+         改column作为第二条SQL的入参
+        -->
+        <collection property="emps" ofType="Emp" select="getEmpsByDeptId" column="deptno">
+        </collection>
+    </resultMap>
+    <select id="getEmpsByDeptId" resultType="Emp">
+        select * from Emp
+        where deptno=#{deptno}
+    </select>
+    <!--1.一对多单条SQL-->
+    <select id="getDeptById" resultMap="DeptMapper">
+         SELECT * FROM Dept,Emp
+         WHERE Dept.deptno=Emp.deptno
+         AND Dept.deptno=#{deptno}
+    </select>
+    <!--2.一对多的多条SQL-->
+    <select id="getDeptByIdMultiSQL" resultMap="DeptMultiMapper">
+        SELECT deptno,deptname FROM Dept
+        WHERE  deptno=#{deptno}
+    </select>
+
+</mapper>
