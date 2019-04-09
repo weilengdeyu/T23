@@ -42,4 +42,10 @@ public interface IStudentDAO {
     public List<Student> forEachTagList(List<Integer> list);
     //12.智能标签forEach 通过学生编号List Student  查询学生信息
     public List<Student> forEachTagListStudent(List<Student> list);
+
+
+
+
+    //根据入参的tid获取所有的学生集合
+    public List<Student> findAllStudentsByTid(int tid) throws  Exception;
 }

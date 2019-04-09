@@ -27,9 +27,33 @@ import java.util.Map;
  */
 public class Day06 {
 
+    @Test
+    //测试自关联  N:1
+    public  void testManyToMany() throws Exception {
+
+        SqlSession session = MybatisUtil.getSession();
+        IStudentDAO dao = session.getMapper(IStudentDAO.class);
+        List<Student> list = dao.findAllStudentsByTid(1);
+        for (Student stu:list){
+            System.out.println(stu.getSname());
+        }
+    }
 
     @Test
-    //测试自关联
+    //测试自关联  N:1
+    public  void testSelfManyToOneSQL() throws Exception {
+
+        SqlSession session = MybatisUtil.getSession();
+        ICategoryDAO dao = session.getMapper(ICategoryDAO.class);
+        List<Category> list = dao.getCategoriesByCid(5);
+        for (Category cate:list){
+            System.out.println(cate);
+        }
+    }
+
+
+    @Test
+    //测试自关联  1:N
     public  void testSelfSQL() throws Exception {
 
         SqlSession session = MybatisUtil.getSession();

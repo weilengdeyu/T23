@@ -7,8 +7,15 @@
      <!--位置-->
     <!--关联properties-->
     <properties resource="jdbc.properties"></properties>
+    
     <settings>
+        <!--自动映射行为的设置  给Mapper用的，关联对象或者单个对象-->
         <setting name="autoMappingBehavior" value="FULL"/>
+        <!--延迟记载设置-->
+        <setting name="lazyLoadingEnabled" value="true"></setting>
+        <setting name="aggressiveLazyLoading" value="false"></setting>
+        <!--在全局开二缓-->
+        <setting name="cacheEnabled" value="true"></setting>
     </settings>
     <typeAliases>
        <!-- <typeAlias type="cn.happy.entity.Student" alias="Student"></typeAlias>
@@ -36,11 +43,11 @@
     </environments>
     <mappers>
         <!--关联小配置-->
-        <package name="cn.happy.*"></package>
-     <!--   <mapper resource="cn/happy/mapper/IStudentDAO.xml"/>
+        <!--<package name="cn.happy.*"></package>-->
+        <mapper resource="cn/happy/mapper/IStudentDAO.xml"/>
         <mapper resource="cn/happy/mapper/IResultDAO.xml"/>
         <mapper resource="cn/happy/mapper/IDeptDAO.xml"/>
         <mapper resource="cn/happy/mapper/IEmpDAO.xml"/>
-        <mapper resource="cn/happy/mapper/ICategoryDAO.xml"/>-->
+        <mapper resource="cn/happy/mapper/ICategoryDAO.xml"/>
     </mappers>
 </configuration>

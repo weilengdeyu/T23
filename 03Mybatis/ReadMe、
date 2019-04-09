@@ -39,7 +39,16 @@ test
 其实增删改都是修改，Mybatis这款框架底层对insert和delete的处理
 都是通过update实现的。
 
-5.
+5.延迟加载
+lazyLoadingEnabled   从3.4.1之后，取值为false，之前为true
+
+5.1没有设置任何延迟加载策略，Mybatis框架的默认行为 ， 立即加载
+ 设置  lazyLoadingEnabled=flase  agreessiveLazyLoading=true
+
+5.2侵入式延迟加载   设置  lazyLoadingEnabled=true  agreessiveLazyLoading=true
+
+5.3深度延迟  使用猪对象的属性也不会发送SQL
+ lazyLoadingEnabled=true  agreessiveLazyLoading=false
 
 
 

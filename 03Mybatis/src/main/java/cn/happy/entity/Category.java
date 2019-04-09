@@ -14,7 +14,16 @@ public class Category {
     private Integer pid;
     //1：N  一个分类下有维护这一个分类集合
     private List<Category> cates;
+    //植入一个自身的对象，作为父类对象
+    private Category parent;
 
+    public Category getParent() {
+        return parent;
+    }
+
+    public void setParent(Category parent) {
+        this.parent = parent;
+    }
 
     @Override
     public String toString() {
@@ -23,6 +32,7 @@ public class Category {
                 ", cname='" + cname + '\'' +
                 ", pid=" + pid +
                 ", cates=" + cates +
+                ", parent=" + parent +
                 '}';
     }
 

@@ -8,13 +8,25 @@
         <result column="cname" property="cname"></result>
         <result column="pid" property="pid"></result>
         <!--1:N
-
         -->
         <collection property="cates" ofType="Category" column="cid" select="getCategoriesByPid"></collection>
+    </resultMap>
+
+    <resultMap id="CategoryParentMapper" type="Category">
+        <id column="cid" property="cid"></id>
+        <result column="cname" property="cname"></result>
+        <result column="pid" property="pid"></result>
+        <association property="parent" javaType="Category" column="pid" select="getCategoriesByCid"></association>
     </resultMap>
      <!--1.根据pid  获取所有的子分类-->
     <select id="getCategoriesByPid" resultMap="CategoryMapper">
         SELECT cid,cname,pid FROM category
         WHERE pid=#{pid}
+    </select>
+
+    <!--2.根据     cid   检索该分类的所有     父分类，包括     父分类的父分类-->
+    <select id="getCategoriesByCid" resultMap="CategoryParentMapper">
+        SELECT cid,cname,pid FROM category
+        WHERE cid=#{cid}
     </select>
 </mapper>

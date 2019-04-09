@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="01Base" />
+        <module name="02Servlet" />
+        <module name="03Mybatis" />
+        <module name="04Spring" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="01Base" target="1.7" />
+      <module name="02Servlet" target="1.7" />
+      <module name="03Mybatis" target="1.7" />
+      <module name="04Spring" target="1.7" />
+      <module name="T23New" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

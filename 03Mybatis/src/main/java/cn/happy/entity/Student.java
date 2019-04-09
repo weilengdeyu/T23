@@ -1,12 +1,15 @@
 package cn.happy.entity;
 
+import java.io.Serializable;
+
 /**
  * @Classname Student
  * @Description 微冷的雨训练营 www.cnblogs.com/weilengdeyu
  * @Date 2019/4/2 12:03
  * @Created by Happy-微冷的雨
  */
-public class Student {
+//面试题
+public class Student implements Serializable {
     private Integer sid;
     private String sname;
     private Integer gid;

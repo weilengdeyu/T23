@@ -13,4 +13,6 @@ import java.util.List;
 public interface ICategoryDAO {
     //01.根据pid检索该pid下所有的子分类，包括子分类的子分类
     public List<Category> getCategoriesByPid(int pid) throws Exception;
+    //02.根据     cid   检索该分类的所有     父分类，包括     父分类的父分类
+    public List<Category> getCategoriesByCid(int cid) throws Exception;
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/01Base/01Base.iml" filepath="$PROJECT_DIR$/01Base/01Base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02Servlet/02Servlet.iml" filepath="$PROJECT_DIR$/02Servlet/02Servlet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03Mybatis/03Mybatis.iml" filepath="$PROJECT_DIR$/03Mybatis/03Mybatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04Spring/04Spring.iml" filepath="$PROJECT_DIR$/04Spring/04Spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/T23New.iml" filepath="$PROJECT_DIR$/T23New.iml" />
+    </modules>
+  </component>
+</project>
