@@ -1,0 +1,48 @@
+2019年4月10日 Spring
+1.Spring第一个入门案例
+  四个步骤：
+2.普通属性和域属性的注入
+  域属性:如果在一个类中，有一个属性的类型又是一个复杂类型，这个时候我们称该属性为域属性
+
+  public  class Person{
+    private String name;
+    private Integer age;
+    //域属性
+    private Car car;
+  }
+  public class Car{
+      private String brand;
+      private String color;
+  }
+3.复杂的打印机案例实现IOC
+打印机分类
+三种：
+ 喷墨打印机  墨盒 （黑色 ，彩色墨盒）
+ 针式打印机  三联单  24K
+ 激光打印机  面板智能按键 功能很全
+
+Paper ----interface
+   A4Paper
+   B5Paper
+Ink    ----Interface
+   GrayInk
+   ColorInk
+Printer class
+   Ink
+   Paper
+  print(){
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

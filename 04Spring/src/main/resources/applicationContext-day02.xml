@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+   <!--准备墨盒-->
+   <bean id="colorInk" class="cn.spring.day02printer.ColorInk"></bean>
+   <!--准备纸张-->
+   <bean id="a4Paper" class="cn.spring.day02printer.A4Paper"></bean>
+
+   <!--通过打印机组合两个组件-->
+   <bean id="printer" class="cn.spring.day02printer.Printer">
+      <property name="ink" ref="colorInk"></property>
+      <property name="paper" ref="a4Paper"></property>
+   </bean>
+</beans>
