@@ -32,6 +32,56 @@ Printer class
    Paper
   print(){
   }
+ 2019年4月11日
+ 复习：
+ 1.图形
+ 2.IOC  Inverse Of Control 控制反转
+    我们之前创建对象的时候，都是硬编码，直接在code体现，一个接口的实现类是谁，或者一个类型的具体对象。
+    在有了SPring技术后，我们可以借助SPring这个容器，容器其实上底层就是一个大Map来管理我们的多个对象。
+    对象的创建不再需要我们手工new了。我们程序员就可以从负责的构建对象的业务中解放出来，直接提供我们
+    需要创建对象的类型就OK了。
+
+    喜乐街：沙溢   贾玲   白凯南
+    new：程序创建对象
+    spring容器，需要简单的配置或者注解（容器扫描一个指定目录，帮我们将类型的对象构建出来）
+
+    反转：对象的生成权从代码层面      反 转给了     Spring容器。
+
+    HelloService  service;
+    sout(service);
+
+    <bean id="service" class="cn.happy.day02.HelloService">
+        <property name="xxx" value="yyy"></property>
+        <property name="xxx" ref="另一个bean节点的id"></property>
+    </bean>
+
+    测试类：
+    说白了就是Spring容器
+    ApplicationContext  ctx=new ClassPathXmlApplicationContext("applicationContext.xml");
+
+    ctx.getBean("bean的id",HelloService.class);
+
+
+ 编译时：
+   检查异常  语法错误
+   class文件：：：：：：：：：：：：：：：
+
+ 运行时
+   运行时异常
+   IOC
+
+
+
+
+ 1.AOP 思想
+    7个专业术语
+ 2.DI和IOC
+ 3.讲解DI操作
+       三种方式：
+       set方法注入
+       构造注入
+       p注入方式
+ 4.自动注入
 
 
 

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+     ">
+  <!--集合属性注入-->
+
+   <bean id="beanCollection" class="cn.spring.day06collection.BeanCollection">
+       <!--array-->
+       <property name="array">
+           <array>
+               <value>中国</value>
+               <value>美国</value>
+               <value>日本</value>
+           </array>
+       </property>
+       <!--list-->
+       <property name="list">
+           <list>
+               <value>中国List</value>
+               <value>美国List</value>
+               <value>日本List</value>
+           </list>
+       </property>
+       <!--set-->
+       <property name="set">
+           <set>
+               <value>中国Set</value>
+               <value>美国Set</value>
+               <value>日本Set</value>
+           </set>
+       </property>
+       <!--map-->
+       <property name="map">
+           <map>
+               <entry key="k1">
+                   <value>v1</value>
+               </entry>
+               <entry key="k2">
+                   <value>v2</value>
+               </entry>
+           </map>
+       </property>
+       <!--properties-->
+       <property name="properties">
+           <props>
+              <prop key="pk1">
+                  pv1
+              </prop>
+               <prop key="pk2">
+                   pv2
+               </prop>
+           </props>
+       </property>
+   </bean>
+
+
+</beans>

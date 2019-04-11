@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+   <!--1.DAO实现  这里面配置的都是类，没有接口-->
+   <bean id="userDAO" class="cn.spring.day03aop.dao.impl.UserDAOImpl"></bean>
+
+   <!--2.Service实现-->
+   <bean id="userService" class="cn.spring.day03aop.service.impl.UserServiceImpl">
+      <property name="userDAO" ref="userDAO"></property>
+   </bean>
+
+   <!--3.增强类-->
+   <bean id="beforeAdvice" class="cn.spring.day03aop.advice.MyBeforeAdvice"></bean>
+
+   <!--4.绑定 AOP-->
+   <aop:config>
+      <!--切点   切点表达式::::设定拦截条件：：：：：：：：：-->
+      <aop:pointcut id="mypoint" expression="execution(* *..service.impl.UserServiceImpl.save*(..))"></aop:pointcut>
+      <!--织入-->
+      <aop:advisor advice-ref="beforeAdvice" pointcut-ref="mypoint"></aop:advisor>
+   </aop:config>
+
+
+</beans>
