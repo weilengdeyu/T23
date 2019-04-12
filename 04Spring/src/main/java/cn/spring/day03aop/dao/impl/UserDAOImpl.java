@@ -11,7 +11,25 @@ import cn.spring.day03aop.entity.User;
  */
 public class UserDAOImpl implements IUserDAO {
     @Override
-    public void saveUser(User user) {
+    public int saveUser(User user) {
         System.out.println("save user ok!");
+        return 1;
+    }
+
+    @Override
+    public int updateUser(User user) {
+        System.out.println("update ok");
+        return 1;
+    }
+
+    @Override
+    public int delUser(Integer id) {
+        System.out.println("del ok!");
+        return 1;
+    }
+
+    @Override
+    public void selectAllUsers() {
+        System.out.println("假装返回所有记录");
     }
 }

@@ -85,6 +85,36 @@ Printer class
 
 
 
+2019年4月12日08:36:38
+1.回顾昨天内容
+  AOP案例：
+  Aspect  Oriented Programming  面向切面编程
+  金牌结论：AOP最终达到的目标对类中方法做增强。
+  程序运行时动态组合原来的方法体和增强。
+
+  AOP只是实现增强一种手段，AOP 过滤器（编码，和鉴权）。
+
+2.如何我想只增强类中的部分方法：
+方案一：云飞版：增删改返回结果都约定成int，这个时候通过returnValue进行限定。
+方案二：约定优于配置 需要事务的方法，都加上一个tx前缀
+方案三：在PointCut动手脚 ，枚举出来所有增删改打头的三类方法。
+
+
+  增强：
+  前置增强  MethodBeforeAdvice
+  后置增强  AfterReturningAdvice
+
+
+
+  集合属性注入
+2.切点表达式
+3.AOP专业术语
+4.基于注解的DI
+
+5.代理：静态代理
+        动态代理：JDK  CGLIB
+6.AOP  代理工厂Bean
+
 
 
 

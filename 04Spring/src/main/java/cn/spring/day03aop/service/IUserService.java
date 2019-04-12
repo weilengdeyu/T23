@@ -9,5 +9,9 @@ import cn.spring.day03aop.entity.User;
  * @Created by Happy-微冷的雨
  */
 public interface IUserService {
-    public void saveUser(User user);
+    public int saveUser(User user);
+    public int updateUser(User user);
+    public int delUser(Integer id);
+    public void selectAllUsers();
+
 }

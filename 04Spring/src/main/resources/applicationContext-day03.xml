@@ -19,7 +19,7 @@
    <!--4.绑定 AOP-->
    <aop:config>
       <!--切点   切点表达式::::设定拦截条件：：：：：：：：：-->
-      <aop:pointcut id="mypoint" expression="execution(* *..service.impl.UserServiceImpl.save*(..))"></aop:pointcut>
+      <aop:pointcut id="mypoint" expression="execution(* *..service.impl.UserServiceImpl.save*(..))||execution(* *..service.impl.UserServiceImpl.update*(..))||execution(* *..service.impl.UserServiceImpl.del*(..))"></aop:pointcut>
       <!--织入-->
       <aop:advisor advice-ref="beforeAdvice" pointcut-ref="mypoint"></aop:advisor>
    </aop:config>

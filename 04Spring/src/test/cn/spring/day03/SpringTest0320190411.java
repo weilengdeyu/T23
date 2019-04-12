@@ -24,6 +24,9 @@ public class SpringTest0320190411 {
         //2.从容器中获取指定的bean
         IUserService service = ctx.getBean("userService", IUserService.class);
         service.saveUser(new User());
+      /*  service.updateUser(new User());
+        service.delUser(1);
+        service.selectAllUsers();*/
 
     }
 
