@@ -116,6 +116,191 @@ Printer class
 6.AOP  代理工厂Bean
 
 
+2019年4月15日08:34:02
+1.关联关系
+  1.一对一
+  2.一对多
+    配置：单条SQL  多表连接查询
+         多条SQL
+     collection
+
+  3.多对一
+        配置：单条SQL  多表连接查询
+             多条SQL
+        assocation
+  4.多对多
+           配置：单条SQL
+           两表的多对多，我们一般思路将其转换成  两个一对多
+           中间表的植入
+           select * from studen,student_teacher,teacher
+           where student.studentno=student_teacher.studentno
+           and student_teacher.tid=teacher.tid
+           and teacher.tid=#{tid}
+           collection
+  5.自关联
+    特殊应用场景：
+    无限极菜单设计
+    Table设计
+    Category表
+    cid  cname      pid
+     1    图书        0
+     2    服装        0
+     3    青年图书    1
+
+     2条SQL   2条SQL   2条SQL
+
+     1条SQL
+
+     3条SQL
+
+
+ 多条SQL配置
+ 第一条SQL
+和第二条SQL
+2.延迟加载：就是等真正使用关联对象属性的时候再去加载，
+分三种：默认情况下使用的是【直接加载】  实现延迟，我们得 手工【配置】
+    直接加载
+    侵入式延迟  lazyLoad=true          arrasiveLoading=true
+      使用主对象的属性 ，子对象的SQL发送了
+    深度延迟
+
+       lazyLoad=true          arrasiveLoading=false
+       使用关联对象的属性的时候，才加载
+ 3.缓存：加快检索速度
+   分成：
+   一级缓存：同一个SqlSession中
+   sqlid 选择不用一级缓存吗？自带的
+
+
+
+   二级缓存：同一个 SQLSessionFactory
+            同一个 mapper/namespace
+
+
+   二级缓存默认：开启的
+   开启和能使用时两回事
+
+   开启二级缓存：
+   1.在config配置中 设置 cacheEnabled =true
+   2.mapper文件中，<cache eviction="缓存对象的清理策略FIFO/LRU(默认的)" flushInterval="刷新频率 60000"  size="1024"/>
+   3.缓存的对象一定要实现一个接口  Serializable
+
+   配置第三方缓存插件
+
+   EhCache：
+         引入依赖
+         <cache type>
+         ehcache.xml
+
+Spring回顾
+3.IOC
+  IOC：控制反转：对象的创建
+           以前对象都是new出来的， 配置文件--------> Spring容器
+           code层面：
+           ApplicationContext：
+
+           new ClassXmlPathApplicationContext
+
+
+           ctx.getBean("beanid",HelloService.class);
+
+  DI：依赖注入
+      三种注入方式：set方法注入
+          <property name="age" value="18">
+          <property name="car" ref="car">
+
+                  构造注入
+           <constructor-arg index="0" value="xxxx"></constructor-arg>
+            <constructor-arg index="1" ref="域属性"></constructor-arg>
+                  p命名空间注入
+                 <bean p:name="xxx"  p:car-ref="car">
+4.AOP
+     AOP 对方法功能进行增强的
+         前置
+         （MethodBeforeAdvice）和后置增强（AfterReturningAdvice）
+     U2：过滤器
+        MyBeforeAdvice {
+
+        }
+     配置文件：
+
+     <aop:config>
+        切点
+        <aop:pointcut id="mypoint" expression="execution(* *..service.impl.UserServiceImpl.*(..))">
+        织入
+        <aop:advisor pointcut-ref="mypoint" advice-ref="beforeAdvice">
+     </aop:config>
+
+5.基于注解DI
+Spring注解
+@Component  类被Spring管理的bean
+@Repository  dao层
+@Service     service层
+@Controller  controller
+
+属性：
+普通属性赋值
+@value
+
+域属性赋值
+@Resource(name="xxx")  JDK的
+
+@Autowired   Spring注解
+@Qualifire
+
+6.代理分类
+静态代理
+    代理模式
+    接口   真正实现类   代理实现类 植入真实实现类的对象
+
+    客户端使用的时候，用的是代理对象的方法，对客户来说，变相的对真实对象的方法进行了增强。
+    他的思想是在硬盘上创建代理类
+
+单例：
+public class StudentSingleton{
+   public static StudentSingleton onlyOne=new StudentSingleton();
+   private StudentSingleton(){
+   }
+   public StudentSingleton getInstance(){
+      if(onlyOne==null){
+        onlyOne=new StudentSingleton(); //懒汉模式
+      }
+   }
+}
+
+
+动态代理
+  JDK动态代理
+  Class clazz=对象名.getClass();
+  clazz.getClassLoader();
+   public static Object newProxyInstance
+   (ClassLoader loader,  类加载器
+    Class<?>[] interfaces, clazz.getInterfaces() 所有接口集合
+   InvocationHandler h)   Invoke调用
+   Invocation 调用
+   Handler：处理
+
+
+final  IHelloService helloService=new HelloSericeImpl();
+IHelloService proxy=(IHelloService)Proxy.newProxyInsatance(ClassLoader,Interfaces,new InvocationHandler(){
+   public Object invoke(Object obj,Method method,Object... args){
+       sout("log");
+       Object result=method.invoke(helloService,args);
+       return result;
+   }
+
+});
+proxy.doSome();
+
+
+
+
+
+复习计划
+
+
+
+
 
 
 

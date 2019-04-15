@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+  <!--目标类-->
+  <bean id="someService" class="cn.spring.day13aop02.SomeService"></bean>
+  <!--2.增强类-->
+  <bean id="afterAdvice" class="cn.spring.day13aop02.MyAfterAdvice"></bean>
+  <!--AOP
+   代理工厂bean，目标就是生成代理bean  所以说我们测试的时候，给的是代理工厂的id，不是目标类的id
+  -->
+  <bean id="proxyService" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <!--目标对象-->
+      <property name="targetName" value="someService"></property>
+    <property name="interceptorNames" value="afterAdvice"></property>
+  </bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
