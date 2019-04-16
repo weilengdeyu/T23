@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+  <!--目标类-->
+  <bean id="someService" class="cn.spring.day16advisor01.SomeService"></bean>
+  <!--2.增强类：：：：：通知-->
+  <bean id="beforeAdvice" class="cn.spring.day16advisor01.MyBeforeAdvice"></bean>
+
+  <!--3.使用顾问去包装通知   ::::名称匹配方法切入点顾问-->
+  <bean id="myAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+    <property name="advice" ref="beforeAdvice"></property>
+    <property name="mappedNames" value="add"></property>
+  </bean>
+
+
+  <bean id="proxyService" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <!--目标对象-->
+      <property name="targetName" value="someService"></property>
+    <property name="interceptorNames" value="myAdvisor"></property>
+  </bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -291,12 +291,140 @@ IHelloService proxy=(IHelloService)Proxy.newProxyInsatance(ClassLoader,Interface
 
 });
 proxy.doSome();
+2019年4月16日
+Advice：通知
+1.顾问  Advisor
+NameMatchMethodPointcutAdvisor
+  ----
+RegexpMethodPointcutAdvisor
+Advisor：顾问
+顾问：包装通知的。
+
+1.1再问正则？
+正则是什么？
+一个字符串，长相比较奇怪  yymqqc@126.com   \w+@\w+\.\w+
+
+正则作用 ？？
+匹配和限定用的
+
+正则元字符
+匹配：
+^
+$
+\w
+\d
+[A-Z]
+
+限定
++ 1到多次
+? 0到1次
+* 0到多次
+
+2.两种自动代理
+DefaultAdvisorAutoProxyCreator
+ 默认顾问自动代理社生成器 ，正如他的名字，他只能对顾问做代理
+
+ BeanNameAutoProxyCreator
+
+ 金牌结论：
+ 1.测试类中，由于没有代理工厂Bean，所以我们这次将getBean指向了目标对象，他其实上生成的是目标类的子类
+ 2.他们可以对多个目标类型中的特定方法做增强
+
+
+3.AspectJ 实现AOP
+
+
+2019年4月16日
+1.初始AOP
+ <!--4.绑定 AOP-->  ★★★★
+   <aop:config>
+      <!--切点   切点表达式::::设定拦截条件：：：：：：：：：-->
+      <aop:pointcut id="mypoint" expression="execution(* *..service.impl.UserServiceImpl.save*(..))||execution(* *..service.impl.UserServiceImpl.update*(..))||execution(* *..service.impl.UserServiceImpl.del*(..))"></aop:pointcut>
+      <!--织入-->
+      <aop:advisor advice-ref="beforeAdvice" pointcut-ref="mypoint"></aop:advisor>
+   </aop:config>
+
+
+2.代理工厂Bean
+<bean id="proxyService" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <!--目标对象-->
+      <property name="targetName" value="someService"></property>
+    <property name="interceptorNames" value="beforeAdvice"></property>
+  </bean>
+
+
+3.顾问的方式
+
+  <!--3.使用顾问去包装通知   ::::名称匹配方法切入点顾问-->
+  <bean id="myAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+    <property name="advice" ref="beforeAdvice"></property>
+    <property name="mappedNames" value="add"></property>
+  </bean>
+
+
+  <bean id="proxyService" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <!--目标对象-->
+      <property name="targetName" value="someService"></property>
+    <property name="interceptorNames" value="myAdvisor"></property>
+  </bean>
+
+
+4.自动代理
 
 
 
+  <!--3.使用顾问去包装通知   ::::正则方法切入点顾问-->
+  <bean id="myAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+    <property name="advice" ref="beforeAdvice"></property>
+    <property name="patterns" value=".*add.*"></property>
+  </bean>
+  <!--自动代理  默认Advisor自动代理生成器  弊端：：只能代理顾问-->
+   <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
+5.AspectJ  注解  ★★★★
+@Aspect
+public class MyAspect {
+   /* //前置增强
+    @Before(value ="execution(* *..*.day20aspectjanno.SomeService.*(..))")
+    public void myBefore(){
+        System.out.println("这是前置增强");
+    }
+    <!--目标类-->
+    <bean id="someService" class="cn.spring.day20aspectjanno.SomeService"></bean>
+    <!--切面类-->
+    <bean id="myAspect" class="cn.spring.day20aspectjanno.MyAspect"></bean>
+
+    <!--寻址注解-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
 
-复习计划
+6.Schema 约束  xml配置    ★★★★★
+
+public class MyAspect {
+    //随手写一个方法
+    //前置方法
+    public void myBefore(){
+        System.out.println("前置增强");
+    }
+
+    //后置方法
+    public void myAfterReturning(){
+        System.out.println("后置增强");
+    }
+
+}
+<!--AOP config的配置-->
+  <aop:config>
+    <!--切点表达式-->
+     <aop:pointcut id="mypoint" expression="execution(* *..*.day21aspectjxml.*.*(..))"></aop:pointcut>
+    <!--切面-->
+    <aop:aspect ref="myAspect">
+     <!--前置增强-->
+       <aop:before method="myBefore" pointcut-ref="mypoint"></aop:before>
+      <!--后置增强-->
+      <aop:after-returning method="myAfterReturning" pointcut-ref="mypoint"></aop:after-returning>
+     </aop:aspect>
+  </aop:config>
+</beans>
 
 
 
