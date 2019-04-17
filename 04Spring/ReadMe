@@ -428,6 +428,40 @@ public class MyAspect {
 
 
 
+JDBC：Java DataBase Connectivity  Java数据库连接
+Java -------------> DB
+Template:模板
+模板引擎
+大家千万注意意见事情，你不要以为，咱们java开发，页面承载数据
+html和jsp  freeMarker 研究一下  theamleaf volocity
+
+Mybatis
+JDBC：
+DbUtils:
+select * from UserInfo-------------------->List<UserInfo>
+JDBCTemplate:
+
+public interface RowMapper<T> {
+    T mapRow(ResultSet var1, int var2) throws SQLException;
+}
+
+是一个接口
+
+ResultSet不保存数据，     读取器
+成果：复旦 哲学  老师
+
+金钱是工具  通向幸福，自信
+
+运河：工具
+
+优化了：
+1.jdbc.properties
+2.xml中配置不再用JDBCTemplate做中间桥梁  DAO和DataSource直接交互。
+3.RowMapper接口
+
+
+
+
 
 
 
