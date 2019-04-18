@@ -1,13 +1,9 @@
 package cn.spring.day22jdbctemplate.dao;
 
 import cn.spring.day22jdbctemplate.entity.Book;
-import cn.spring.day22jdbctemplate.util.MyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import cn.spring.day22jdbctemplate.util.RowMapperUtil;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -22,7 +18,7 @@ public class BookDAOImpl extends JdbcDaoSupport implements IBookDAO {
     public List<Book> findAllBooks() {
         String sql="select * from book";
         //补全mapRow方法使用的是 alt+enter
-        List<Book> list = this.getJdbcTemplate().query(sql, new MyRowMapper<Book>());
+        List<Book> list = this.getJdbcTemplate().query(sql, new RowMapperUtil<Book>(){});
         return list;
     }
 }

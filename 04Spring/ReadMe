@@ -459,6 +459,79 @@ ResultSet不保存数据，     读取器
 2.xml中配置不再用JDBCTemplate做中间桥梁  DAO和DataSource直接交互。
 3.RowMapper接口
 
+2019年4月18日
+1.jdbcTemplate  基于jDBC 高于 JDBC
+四大对象
+Connection
+PrepareStatement
+ResultSet
+---------------------
+DriverManager
+Class.forName
+
+JDBC操作DB，使用的API称为低级API  底层 ，可以对干预性更强。
+
+jdbcTemplate高级API。暴露了一个高级的编程接口，对程序员公开的接口不是特别透明 ，告诉我们
+入参和结果。至于底层数据库和连接直接关系，我们需要看底层的code才能知道原理。
+query(sql,RowMapper)
+
+短信接口
+支付接口 json
+邮箱接口
+第三方接口
+微信支付  xml数据
+
+按照规范传递特定格式的数据，阿里云支付宝，沙箱环境测试支付。
+商户的编号，订单号，订单金额，令牌，加密----------> 返回给一个支付成功或者是失败的json值。
+
+JDBCTemplate
+
+
+
+
+public class BookDAOImpl extends JdbcDaoSupport implements  IBookDAO{
+   public void findAllBooks(){
+      String sql="select * from book";
+      //谁帮我执行sql
+      //JDBC  PS  迫切的需要一个命令对象执行sql，找到了JDBCTempldate类
+      this.getJdbcTemplate().query(sql);
+   }
+}
+
+识别到文件
+<context:property-placeholder location=>
+数据源
+  四种
+  Spring内置的
+    DriverManagerDtaSource
+  dbcp连接池
+  c3p0  ComboPooledDataSource
+  阿里druid
+  DruidDataSource
+
+
+JDBCTemplate
+DAO------》JDBCTemplate
+DAO------》DataSource
+
+service-------》DAO
+
+
+容器取出service
+可以了
+
+
+public class JdbcDaoSupport{
+   private JdbcTemplate:
+   private Datasource datasource;
+}
+
+//手写框架
+
+//手写Tomcat
+
+
+//xml +反射 ++++动态代理 ++++设置模式
 
 
 

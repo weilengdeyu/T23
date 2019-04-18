@@ -51,9 +51,19 @@
     <bean id="bookDAO" class="cn.spring.day22jdbctemplate.dao.BookDAOImpl">
         <property name="dataSource" ref="datasource"></property>
     </bean>
+    <!--3.DAO-->
+    <bean id="stockDAO" class="cn.spring.day22jdbctemplate.dao.StockDAOImpl">
+        <property name="dataSource" ref="datasource"></property>
+    </bean>
+
     <!--4.Service-->
     <bean id="bookService" class="cn.spring.day22jdbctemplate.service.BookServiceImpl">
         <property name="bookDAO" ref="bookDAO"></property>
+    </bean>
+
+    <!--4.Service-->
+    <bean id="stockService" class="cn.spring.day22jdbctemplate.service.StockServiceImpl">
+        <property name="stockDAO" ref="stockDAO"></property>
     </bean>
 </beans>
 
