@@ -23,7 +23,7 @@ public class SpringTest0320190418 {
         //创建一个SPring容器
         ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext-day23.xml");
         //2.从容器中获取指定的bean
-        IStockService stockService = ctx.getBean("proxyBean", IStockService.class);
+        IStockService stockService = ctx.getBean("stockService", IStockService.class);
         int count = 0;
         try {
             count = stockService.buyStock(1, 10, 1, 1000);

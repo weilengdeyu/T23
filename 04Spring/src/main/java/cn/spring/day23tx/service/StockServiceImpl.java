@@ -4,6 +4,9 @@ import cn.spring.day23tx.dao.IAccountDAO;
 import cn.spring.day23tx.dao.IStockDAO;
 import cn.spring.day23tx.entity.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Classname StockServiceImpl
@@ -19,6 +22,8 @@ public class StockServiceImpl implements IStockService {
     @Autowired
     private IStockDAO stockDAO;
     @Override
+    //事务的属性 或者是参数设置 呢
+    //@Transactional(isolation = Isolation.DEFAULT,propagation = Propagation.REQUIRED,rollbackFor =MyException.class )
     public int buyStock(int sid, int count, int aid, int money) throws MyException {
         boolean isBuy=true;
         //账户金额减少

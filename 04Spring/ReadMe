@@ -533,6 +533,38 @@ public class JdbcDaoSupport{
 
 //xml +反射 ++++动态代理 ++++设置模式
 
+2019年4月19日09:13:46
+1.事务方案一：事务代理工厂Bean
+<bean id="transactionManager" class="DatasourceTransactionManager"> 植入数据源
+
+ <bean id="proxyBean" class="TransactionProxyFactoryBean">
+     <property name="transactionManager" ref="transactionManager">
+
+      <property name="target" ref="stockService">
+      策略
+      <property name="transactionAttributes">
+        <props>
+           <prop key="buyStock">ISOLATION_DEFAULT,PROPAGATION_REQUIRED,-MyException</prop>
+        </props>
+ </bean>
+
+2.授课内容
+第二种实现事务的方案    开发常用
+    <!--方式二：注解驱动-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+第三种实现方式事务方案 aspectj方式  优雅度更高  开发常用
+    <tx:advice id="stockAdvice" transaction-manager="transactionManager">
+       <tx:attributes>
+           <tx:method name="buy*" isolation="DEFAULT" propagation="REQUIRED" rollback-for="MyException" />
+           <tx:method name="select*" isolation="DEFAULT" propagation="REQUIRED" read-only="true" />
+       </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="mypoint" expression="execution(* *..service.*.*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="stockAdvice" pointcut-ref="mypoint"></aop:advisor>
+    </aop:config>
+
 
 
 

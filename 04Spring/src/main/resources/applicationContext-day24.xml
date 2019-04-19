@@ -18,55 +18,39 @@
         <property name="minIdle" value="1"></property>
         <property name="maxWait" value="60000"></property>
     </bean>
+    <!--3、bookDAO
+      老湿：那接口实现类的 对象id名称是什么
+      IXXXDAO  IXXXDAO
+      XXXDAO   xXXDAO
+    -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.spring.day24ssm.dao"></property>
+    </bean>
 
-    <!--3、AccountDAO-->
-    <bean id="accountDAO" class="cn.spring.day23tx.dao.AccountDAOImpl">
+    <!--3.SqlSessionFactory      Spring就爱管理Bean： SqlSessionFactoryBean   就是用来创建SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
-    </bean>
-    <!--4、StockDAO-->
-    <bean id="stockDAO" class="cn.spring.day23tx.dao.StockDAOImpl">
-        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation" value="classpath:mybatis.xml"></property>
     </bean>
 
-    <!--5.Service只有一个就是Stock的Service-->
-    <bean id="stockService" class="cn.spring.day23tx.service.StockServiceImpl">
-        <property name="accountDAO" ref="accountDAO"></property>
-        <property name="stockDAO" ref="stockDAO"></property>
+    <!--service-->
+    <bean id="bookService" class="cn.spring.day24ssm.service.impl.BookServiceImpl">
+        <property name="bookDAO" ref="IBookDAO"></property>
     </bean>
+
     <!--6、事务管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
          <property name="dataSource" ref="dataSource"></property>
     </bean>
     <!--7、事务处理-->
     <!--方式三：AspectJ方式  通用的用户-->
-    <tx:advice id="stockAdvice" transaction-manager="transactionManager">
+    <tx:advice id="bookAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <!--这里是对所有需要事务环境的方法的事务属性策略的一个具体细化操作-->
-            <tx:method name="buy*" isolation="DEFAULT" propagation="REQUIRED" rollback-for="MyException"/>
+            <tx:method name="add*" isolation="DEFAULT" propagation="REQUIRED" rollback-for="MyException"/>
             <tx:method name="select*" read-only="true"/>
         </tx:attributes>
     </tx:advice>
-    <aop:config>
-        <aop:pointcut id="mypoint" expression="execution(* *..*.service.*.*(..))"></aop:pointcut>
-        <aop:advisor advice-ref="stockAdvice" pointcut-ref="mypoint"></aop:advisor>
-    </aop:config>
-    <!--方式二：事务注解驱动-->
- <!--   <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>-->
-
-
-
-    <!--方式一：事务代理工厂Bean-->
-   <!-- <bean id="proxyBean" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager" ref="transactionManager"></property>
-        <property name="target" ref="stockService"></property>
-        &lt;!&ndash;事务属性 隔离级别  传播行为&ndash;&gt;
-        <property name="transactionAttributes">
-            <props>
-                <prop key="buyStock">ISOLATION_DEFAULT,PROPAGATION_REQUIRED,-MyException</prop>
-            </props>
-        </property>
-    </bean>-->
-
 </beans>
 
 
