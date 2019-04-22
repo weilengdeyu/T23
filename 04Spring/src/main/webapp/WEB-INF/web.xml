@@ -3,5 +3,32 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <!--任何框架只要和Spring整合-->
+ <!--Spring配置-->
+
+ <!--之一：-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext-day24.xml</param-value>
+  </context-param>
+
+
+  <!--之二：配置监听器-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+<!--  <servlet>
+    <servlet-name>studentServlet</servlet-name>
+    <servlet-class>cn.spring.day24ssm.web.StudentServlet</servlet-class>
+    <init-param>
+      <param-name>keykey</param-name>
+      <param-value>vv</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>studentServlet</servlet-name>
+    <url-pattern>/StudentServlet</url-pattern>
+  </servlet-mapping>-->
 </web-app>

@@ -5,6 +5,7 @@ import cn.spring.day24ssm.service.IBookService;
 import cn.spring.day24ssm.service.impl.BookServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +23,17 @@ public class BookServlet extends javax.servlet.http.HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       req.setCharacterEncoding("utf-8");
+  /*      String value = getInitParameter("keykey");
+        System.out.println(value);*/
+
+        String value =getServletContext().getInitParameter("globalKey");
+        System.out.println(value);
+
         System.out.println("xxxxxxxxxxxxxxxxx");
           //调度service
-        ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext-day24.xml");
+       /* ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext-day24.xml");*/
+        ApplicationContext ctx= WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+        System.out.println(ctx);
         IBookService bookService=ctx.getBean("bookService",IBookService.class);
         Book book=new Book();
         String bookname=req.getParameter("bookname");

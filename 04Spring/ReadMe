@@ -565,6 +565,210 @@ public class JdbcDaoSupport{
         <aop:advisor advice-ref="stockAdvice" pointcut-ref="mypoint"></aop:advisor>
     </aop:config>
 
+2019年4月22日
+1.复习
+  1.1 面试题：
+   说一下你眼中的AOP
+     1.1.1 前置增强，后置增强，环绕和异常增强 4种增强是 原生AOP的 王彬版本
+
+     1.1.2 采用代理机制在不改变原代码的基础上，增强类中方法的功能。
+
+     1.1.3 面向切面编程  ，OOP关系？？？AOP是OOP的补充， AOP统一管理公共业务（交叉业务） 核心业务
+         之前在OOP时候，我们去区分核心业务和交叉业务，在AOP时代打破了这种僵局。
+
+     1.1.4  7个专业术语
+         连接点：增强的时机
+         切点：目标类中   能 匹配到切点表达式的方法
+         增强：就是   拦截到目标类中 的方法后要   做的事情 eg:日志 ，事务 ，鉴权
+         代理对象：把另一个类(目标类)的  对象  代理出来！！！
+                 代理对象的引用   ，并不是原始对象的引用
+                 就是进行增强后的结果
+
+         目标对象：被增强的对象
+         切面 ：@Aspect 定义或者概念   切点+增强
+         织入 ：将 增强 应用到   目标类中的方法 的过程，该动态过程称为织入
+
+
+   1.2 实现AOP方案
+       1.2.1 代理工厂Bean
+       目标类
+
+       增强类（Advice）
+
+       <bean id="serviceProxy" class="ProxyFactoryBean">
+             <property target="目标类">
+             <property interceptorNames="serviceAdvice">
+       </bean>
+
+       1.2.2 顾问：包装通知的Advice（通知）
+       目标类
+       增强类（Advice）
+       定义顾问 Advisor  选择性的增强目标类中的部分方法
+       <bean id="serviceProxy" class="ProxyFactoryBean">
+                    <property target="目标类">
+                    <property interceptorNames="serviceAdvisor">
+      </bean>
+
+
+      1.2.3 AspectJ   默认在SPring框架中，还是后续集成的？？？
+
+        1.2.3.1 注解  ☆☆☆☆☆
+            @Aspect
+            public class MyAspect{
+                @Before(value="execution(* *..*.*.*(..))")
+                public void myBefore(){
+
+                }
+            }
+
+           配置文件 ，需要配置
+
+        1.2.3.2 XML  ☆☆☆☆☆
+          public class MyAspect{
+              public void myBefore(){
+              }
+          }
+
+          XML
+          <bean id="myAspect" class="xxx.MyAspect">
+          //配置文件如何锁定类和方法，以确定功能？？？？？
+          XML：
+          <aop:config>
+             <aop:pointcut id="mypoint" expression="execution(* *..*.*.*(..))">
+             <aop:aspect ref="myAspect">
+                <aop:before method="myBefore" pointcut-ref="mypoint">
+              </aop:aspect>
+          </aop:config>
+
+   1.3自动代理
+
+    目标类
+    增强（通知）
+    顾问
+    彻底的剔除了代理工厂Bean
+    <bean class="DefaultAdvisorAutoProxyCreator">  只能自动代理顾问
+
+
+
+    <bean class="BeanNameAutoProxyCreator">    通过name的方式选择性的代理一部分目标对象
+
+    可以配置通知，不仅仅是顾问
+
+
+   1.4 AOP案例的第一次  顾问的方式
+   Advisor
+   <aop:config>
+      <aop:pointcut id="mypoint" expression="execution(* *..*.*.*(..))">
+      <aop:advisor pointcut-ref="mypoint" advice-ref="xxxAdvisor">
+      </aop:advisor> 经典AOP
+   ------6种类
+
+1.3 JDBCTemplate  dbutils   写了工具  ，真的是优点类似于  jdcbTemplate+工具类====dbuils
+sql  ---------------------->>>>>>>List<T>
+select * from studnet ----->List<Stu水土dent
+
+public class StudentDAOImpl extends  JdbcDaoSupport implements IStudentDAO{
+       通过给DAO注入datasourc的方式，让jdbcTemplate不是null
+      this.getJdbcTemplate().query(sql,new RowMapper(){
+
+       public Student  mapRow(ResultSet rs,int index){
+          这里不用  手工循环    mapRow被多次调度
+         stu.setName(rs。getXXX());
+       }
+
+
+      });
+      //匿名内部类：
+
+       //程序员是无法触碰名字的，不能二次调度，
+       //底层编译器知道
+
+       this.getJdbcTemplate().query(sql,new MyMapper());
+
+       public class  MyMapper implements  RowMapper(){
+
+                                                      public Student  mapRow(ResultSet rs,int index){
+
+
+                                                      }
+
+
+                                                     }
+
+}
+
+接口---------------》
+
+JdbcDaoSupport
+  setDataSource
+  setJdbcTemplate
+1.4事务
+  概念：同生共死
+  四个特性：ACID 原则
+           原子性 AutoMatically
+           一致性 Consistency
+           隔离性 ISOlation 并发事务（A和B两个事务） A事务的执行结果不易影响到B事务
+           持久性 Durability
+
+   隔离级别：
+      Read_UnCommitted :读未提交
+      Read_Committed :读已提交
+      Repatable_read:可重复读
+      Serializable  :可串行化
+
+      结论：从上到下，隔离级别越来越严格，意味着之前的脏读，不可重复读和幻读。
+
+
+      丢失更新问题：乐观锁 version  / 悲观锁
+
+   传播行为：
+
+2.整合收尾
+  整合不是简单两个框架jar包的罗列
+  Spring ：2个依赖
+  Mybatis：2个依赖
+
+  整合：一定某个框架将他一部分组件的生成和管理全交给了另一个框架，一般这个框架是Spring
+
+  SSM（Spring Servlet Mybatis ）整合步骤：
+  1.依赖导入
+    mybatis-spring 由mybatis提供的
+  2.定义表
+  3.构造实体
+  4.DAO层
+     接口
+     和接口同名的配置文件（） 接口命名规范，决定Spring帮你构建接口实现类的名称IBookDAO  IBookDAO
+       BookDAO   bookDAO
+  5.service层
+     植入daoc层的一个接口
+  6.web/servlet
+    引入service
+     最大的问题，servcie----》
+
+  7.applicationContext.xml
+    7.1 数据源
+    7.2 识别到数据源的jdbc.properties
+    7.3 工厂
+    <bean class="SqlSessionFactoryBean">
+       <property name="datasource" ref="datasource">
+       <property name="configloaction" value="classpath:mybatis.xml">
+    </bean>
+    7.4 每个接口的实现类
+    <bean class="MapperScannerConfiger">
+    <property basepackage="cn.happy.dao">  根据接口的命名规范，在容器中生成dao实现类对象
+
+   7.5 service
+       植入dao
+   7.6 事务管理器
+
+   7.7  事务操作
+
+
+
+3.传播行为
+
+4.SpringMVC概览
+
 
 
 
