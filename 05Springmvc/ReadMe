@@ -1,0 +1,67 @@
+2019年4月23日
+  1.Springmvc执行流程
+
+   1.1 request----发送给---->DispatcherServlet(前端控制器/中央调度器)
+
+   1.2
+
+   1.3
+
+   1.4
+
+   1.5
+
+   1.6
+
+  2.第一个案例
+  2.1 节点依赖引入
+    <!--SpringWebMVC-->
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-webmvc</artifactId>
+              <version>${spring.version}</version>
+          </dependency>
+   2.2
+
+ 3.植入模型
+
+ 4.视图解析器
+
+ 5.解决静态资源无法访问的三种方案
+
+ 6.BeanNameUrlHandlerMapping
+   寻址路径：
+     打开工程的External Library----------------输入webmvc ，点击org.springframwork.web.servlet.DispathcerServlet.properties
+     看就行了。
+
+
+ 7.SimpleUrlHandlerMapping
+  /
+
+ 8.Handler
+
+ 9.AbstractController
+
+ 10.MultiActionController
+
+ 重要：还东西
+ 1.Springmvc概论
+ 2.底层代码  HandlerMapping
+ 3.数据结构
+ 4.Handler
+
+
+
+ 11.PropertiesMethodNameResolver
+
+ 12.ParameterMethodNameResolver
+
+ 13.ModelAndView
+ 14.InternalResourceViewResolver
+ 15.BeanNameViewResolver
+ 16.XmlViewResolver
+
+ 17.注解式开发
+
+ 18.
+
