@@ -38,6 +38,16 @@
  7.SimpleUrlHandlerMapping
   /
 
+2019年4月24日09:38:13
+1.Springmvc定位：请求流转框架
+  架构位置：Spring框架的Springweb模块中的一个组件
+2.model2的升级版 。M：Model  V：View  C：Controller
+3.Springmvc前端控制器 ---是一个Servlet
+ Struts2   -------->Filter
+
+
+
+
  8.Handler
 
  9.AbstractController

@@ -11,7 +11,7 @@
     <!--容器启动后，自动的已经形成对象-->
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:applicationContext.xml</param-value>
+      <param-value>classpath:applicationContext-day05.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>

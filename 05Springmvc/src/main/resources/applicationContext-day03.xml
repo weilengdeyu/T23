@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--SimpleUrlHandlerMapping-->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="urlMap">
+           <map>
+               <entry key="/*" value="multiActionController"></entry>
+           </map>
+        </property>
+    </bean>
+
+
+    <bean id="multiActionController" class="cn.springmvc.day03multiaction.MyMultiActionController">
+        <property name="methodNameResolver" ref="methodNameResolver"></property>
+    </bean>
+    <!--方法名称解析器-->
+    <bean id="methodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+        <property name="mappings">
+            <props>
+                <prop key="/add">doAdd</prop>
+                <prop key="/delete">doDelete</prop>
+            </props>
+        </property>
+    </bean>
+ <!--视图解析器-->
+ <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+     <property name="prefix" value="/"></property>
+     <property name="suffix" value=".jsp"></property>
+ </bean>
+</beans>
