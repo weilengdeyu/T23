@@ -4,6 +4,26 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <!--请求的编码-->
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+    <!--响应的编码  true：和请求保持一致-->
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <servlet>
     <servlet-name>springmvc</servlet-name>
     <!--前端控制器-->
@@ -11,7 +31,7 @@
     <!--容器启动后，自动的已经形成对象-->
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:applicationContext-day05.xml</param-value>
+      <param-value>classpath:applicationContext-day10.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -20,6 +40,17 @@
     <!--url 地址匹配的规范-->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+  <!--编码过滤器-->
+  <!--全局角度考虑问题-->
+  <!--过滤器，解决post请求乱码-->
+  <!--最大特点：双向过滤 request response-->
+
+
+
+
+
+
  <!-- <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.jpg</url-pattern>
