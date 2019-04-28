@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+  <title>五道口学院</title>
+  <link rel="stylesheet" href="../res/layui/css/layui.css">
+  <link rel="stylesheet" href="../res/static/css/index.css">
+</head>
+<body>
+<!-- nav部分 -->
+<div class="nav">
+  <div class="layui-container">
+    <!-- 公司logo -->
+    <div class="nav-logo">
+      <a href="index.html">
+        <img src="../res/static/img/logo.png" width="225" height="106" alt="类友网络">
+      </a>
+    </div>
+    <div class="nav-list">
+      <button>
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="layui-nav" lay-filter="">
+        <li class="layui-nav-item"><a href="index.html">首页</a></li>
+        <li class="layui-nav-item"><a href="freevideo.html">免费视频</a></li>
+        <li class="layui-nav-item"><a href="stupro.html">学生作品</a></li>
+        <li class="layui-nav-item layui-this"><a href="activity.html">文化活动</a></li>
+        <li class="layui-nav-item"><a href="about.html">关于</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+  <!-- main部分 -->
+  <div class="main-newsdate">
+    <div class="layui-container">
+      <h1>青鸟五道口博客系统</h1>
+      <p class="pushtime">发布人：<span>微冷的雨</span></p>
+      <div class="introBott">
+        <p><h3 style="color:red;">技术选型: </h3> JDK8、数据库MySQL、主框架 (Spring-boot、Spring-data-jpa）、安全权限 Shiro、搜索工具 Lucene、缓存 Ehcache、视图模板 Freemarker、Bootstrap 前端框架 </p>
+        <p><h3 style="color:red;">项目描述:</h3>博客能让个人在互联网上表达自己的心声。这是一个收集和共享任何感兴趣的事物的地方——可以是政治评论、
+        个人日记或是指向您想记住的网站链接。多使用博客只是要组织自己的想法，而有些人则在全球成千上万的浏览者中赢得影响力。
+        职业和企业新闻记者使用博客发布特发新闻，而有写日记习惯的人则会在博客中宣示自己内心的想法。而摄影和美发发烧者，
+        可以通过博客系统管理自己的作品，无论您要发表什么意见，博客可以帮您来表达。
+      </p>
+        <p><h3 style="color:red;">项目演示 ：<a style="color:#2ab5a3;font-weight: 500;" href="http://39.106.226.194:8080/mblog/">博客系统</a></h3></div>
+      </div>
+    </div> 
+  </div>
+  <!-- footer部分 -->
+  <div class="footer">
+    <div class="layui-container">
+      <p class="footer-web">
+        <a href="javascript:;">合作伙伴</a>
+        <a href="javascript:;">课工场</a>
+      </p>
+      <div class="layui-row footer-contact">
+        <div class="layui-col-sm2 layui-col-lg1"><img src="../res/static/img/code.jpg" width="86px" height="86px"></div>
+        <div class="layui-col-sm10 layui-col-lg11">
+          <div class="layui-row">
+            <div class="layui-col-sm6 layui-col-md8 layui-col-lg9">
+              <p class="contact-top"><i class="layui-icon layui-icon-cellphone"></i>&nbsp;400-8888888&nbsp;&nbsp;&nbsp;(9:00-18:00)</p>
+              <p class="contact-bottom"><i class="layui-icon layui-icon-home"></i>&nbsp;yymqqc@126.com</span></p>
+            </div>
+            <div class="layui-col-sm6 layui-col-md4 layui-col-lg3">
+              <p class="contact-top"><span class="right">北京市海淀区五道口</span></p>
+              <p class="contact-bottom"><span class="right">Copyright&nbsp;©&nbsp;2016-2019</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="../res/layui/layui.js"></script>
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script>
+  layui.config({
+    base: '../res/static/js/' 
+  }).use('firm'); 
+</script>
+
+</body>
+</html>
