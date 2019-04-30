@@ -73,4 +73,166 @@
 2.HashMap和LinkedList探讨数据结构
 3.注解开发
 
+2019年4月29日
+1.SpringMVC
+  架构
+自我介绍：
+    姓名-----毕业院校-----我会SSM框架，并且会Oracle和Mysql、
+    之前在XXXXXXXXX工程师职务》项目-------》ERP系统-----》
+    还做过一个YYY项目，经理。
+Springmvc执行流程
+Mybatis怎么看？？？JDBC优点
+Spring AOP 应用场景是什么
+
+2.开发步骤
+  2.1  引入依赖
+       springwebmvc
+  2.2  web.xml中配置前端控制器
+
+  2.3  控制器
+       FirstController implements Controller{
+          public ModelAndView handleRequest(HttpServletRequest request,HttpServletResonse respnose){
+             ModelAndView mv=new  ModelAndView();
+             mv.addObject("key","value");
+             mv.setViewName("逻辑视图名");
+          }
+       }
+  2.4 applicationContext.xml
+       和bean节点绑定 ，公开一个地址 id就是地址 ，id="/hello" class="FirstController"
+
+  2.5  jsp页面
+
+  2.6视图解析器 逻辑视图设置 前缀(prefix)和后置(suffix)的
+     默认的InternalResourceViewResolver
+
+  2.7 HandlerMapping 也可以手工配置
+      BeanNameUrlJHandlerMapping
+
+3.HandlerMapping执行流程
+
+4.注解开发
+  @Controller
+  @RequestMapping("/doList")
+  public String doList(){
+      return "xxxx";
+  }
+5.请求参数问题
+   5种类型
+    HTTPServletRequest
+    HTTPServletResponse
+    HTttpSession
+    Model  model
+    请求数据
+      get：url地址  ?A=B&C=D
+      post:  form表单的方式
+6.路径变量
+   @PathVariable
+     @RequestMapping("/doList/{name}/{age}")
+     public String doList(@PathVariable("name")String name ,@PathVariable("age") int age){
+         return "xxxx";
+     }
+
+  http://localhost:8080/doList/张三/20
+  类型转换器
+      字符串 int
+      字符串 日期  2019/04/29
+      自自定义类型转换器
+7.自动装配
+  7.1  包扫描器和注解结合
+       注解驱动
+
+       零散参数
+          view:标签中name值
+          Controller：方法的参数名称一致
+       对象类型
+            view: 对象的属性名
+
+            Controller：方法的参数名称一致
+        集合对象类型
+            view: 集合[0].属性
+
+            Controller：方法的参数名称一致
+
+8.乱码解决
+   post
+   通过  过滤器  手段解决了乱码问题
+
+ 过滤器：组件：
+ 1.就是请求到达真正的处理器之前先经过他。
+
+
+ 2.过滤器是可以双向过滤的，不仅仅可以对请求过滤，也可以对响应过滤
+
+ 3.可以配置多个过滤器，过滤器链
+
+ 4.过滤器的使用目的：就是把不满足要求的，拦截到之后。、
+  走我们定制好的流程，一般都是回到登录。
+  满足要求的继续走请求管道，他可能放行到下一个过滤器或者是放行到处理器。
+
+
+8.Ajax
+  全称：Asynchronized（异步的）javascript and XML  异常的js和XMl  css
+  目标：局部刷新
+
+  $.ajax({
+    type:"POST",
+    url:"/first",
+    success:function(data){
+
+    }
+  })
+
+
+js json串 转成json 方案
+
+
+
+
+作业：
+1.jquery注册事件的几种方式？
+  click
+  bind
+  live
+  on
+  delegate
+  总结
+2.明天找两位面试
+      自我介绍
+      专业技能+项目经验（嗖嗖移动和易买网）
+      SSM框架
+
+3.SSM整合
+     异常处理
+     类型转换器
+     文件上传
+     数据校验
+     拦截器
+4.SSM三大框架 150页石墨文档
+5.Linux命令
+  JDK
+  Mysql
+  tomcat
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
