@@ -8,6 +8,8 @@ import cn.springmvc.day12ssm.cn.book.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 作者：微冷的雨
  *
@@ -23,5 +25,10 @@ public class BookServiceImpl implements IBookService {
     @Override
     public int addBook(Book book) {
         return bookMapper.insertSelective(book);
+    }
+
+    @Override
+    public List<Book> findAllBooks() {
+        return bookMapper.findAllBooks();
     }
 }

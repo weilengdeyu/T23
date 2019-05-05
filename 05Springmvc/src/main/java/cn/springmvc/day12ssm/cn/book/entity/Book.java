@@ -8,8 +8,11 @@ package cn.springmvc.day12ssm.cn.book.entity;/**
  * 博客地址:www.cnblogs.com/weilengdeyu
  */
 public class Book {
+    //图书编号
     private Integer bookid;
+    //图书名称
     private String  bookname;
+    //图书价格
     private double bookprice;
 
     public Integer getBookid() {
