@@ -1,0 +1,39 @@
+teachingfeedbackSystem  教学反馈系统
+简称：tfs
+1.DBFirst
+2.数据库 tfs
+   数据表：
+   sys_user: 系统用户表
+     uid  用户编号
+     uname; 用户名
+     unickname  用户昵称
+     upwd   用户密码
+     ulogindate 最近一次登录时间
+     isDelete   是否删除
+     isOnline  是否在线
+     remark1   备用字段1
+     remark2   备用字段2
+
+   teach_feedback  授课反馈表
+      feedid:反馈编号
+      feedperson 反馈人：（游客匿名/系统用户）
+      feedtitle 反馈标题
+      feedcontent 反馈内容
+      feeddate 反馈时间
+      feedstatus 反馈状态：已反馈未阅读   已阅读    阅读未回复   阅读已回复
+      feddIsDelete 是否删除
+      remark1 备注1
+      remark2 备注2
+
+
+    404和500页面定制
+
+修正记录2019年5月8日
+1.图片水印
+  通过过滤器加水印
+
+
+
+
+
+

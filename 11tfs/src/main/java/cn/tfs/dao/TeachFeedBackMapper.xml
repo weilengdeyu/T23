@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tfs.dao.TeachFeedBackMapper">
+  <resultMap id="BaseResultMap" type="cn.tfs.entity.TeachFeedBack">
+    <id column="feedid" jdbcType="INTEGER" property="feedid" />
+    <result column="feedperson" jdbcType="INTEGER" property="feedperson" />
+    <result column="feedtitle" jdbcType="VARCHAR" property="feedtitle" />
+    <result column="feedcontent" jdbcType="VARCHAR" property="feedcontent" />
+    <result column="feeddate" jdbcType="TIMESTAMP" property="feeddate" />
+    <result column="feedstatus" jdbcType="INTEGER" property="feedstatus" />
+    <result column="feedisdelete" jdbcType="BIT" property="feedisdelete" />
+    <result column="remark1" jdbcType="VARCHAR" property="remark1" />
+    <result column="remark2" jdbcType="VARCHAR" property="remark2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    feedid, feedperson, feedtitle, feedcontent, feeddate, feedstatus, feedisdelete, remark1,
+    remark2
+  </sql>
+  <!--01.查找所有-->
+  <select id="findAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from teach_feedback
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from teach_feedback
+    where feedid = #{feedid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from teach_feedback
+    where feedid = #{feedid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.tfs.entity.TeachFeedBack">
+    insert into teach_feedback (feedid, feedperson, feedtitle,
+    feedcontent, feeddate, feedstatus,
+    feedisdelete, remark1, remark2
+    )
+    values (#{feedid,jdbcType=INTEGER}, #{feedperson,jdbcType=INTEGER}, #{feedtitle,jdbcType=VARCHAR},
+    #{feedcontent,jdbcType=VARCHAR}, #{feeddate,jdbcType=TIMESTAMP}, #{feedstatus,jdbcType=INTEGER},
+    #{feedisdelete,jdbcType=BIT}, #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tfs.entity.TeachFeedBack">
+    insert into teach_feedback
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="feedid != null">
+        feedid,
+      </if>
+      <if test="feedperson != null">
+        feedperson,
+      </if>
+      <if test="feedtitle != null">
+        feedtitle,
+      </if>
+      <if test="feedcontent != null">
+        feedcontent,
+      </if>
+      <if test="feeddate != null">
+        feeddate,
+      </if>
+      <if test="feedstatus != null">
+        feedstatus,
+      </if>
+      <if test="feedisdelete != null">
+        feedisdelete,
+      </if>
+      <if test="remark1 != null">
+        remark1,
+      </if>
+      <if test="remark2 != null">
+        remark2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="feedid != null">
+        #{feedid,jdbcType=INTEGER},
+      </if>
+      <if test="feedperson != null">
+        #{feedperson,jdbcType=INTEGER},
+      </if>
+      <if test="feedtitle != null">
+        #{feedtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="feedcontent != null">
+        #{feedcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="feeddate != null">
+        #{feeddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedstatus != null">
+        #{feedstatus,jdbcType=INTEGER},
+      </if>
+      <if test="feedisdelete != null">
+        #{feedisdelete,jdbcType=BIT},
+      </if>
+      <if test="remark1 != null">
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null">
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tfs.entity.TeachFeedBack">
+    update teach_feedback
+    <set>
+      <if test="feedperson != null">
+        feedperson = #{feedperson,jdbcType=INTEGER},
+      </if>
+      <if test="feedtitle != null">
+        feedtitle = #{feedtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="feedcontent != null">
+        feedcontent = #{feedcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="feeddate != null">
+        feeddate = #{feeddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedstatus != null">
+        feedstatus = #{feedstatus,jdbcType=INTEGER},
+      </if>
+      <if test="feedisdelete != null">
+        feedisdelete = #{feedisdelete,jdbcType=BIT},
+      </if>
+      <if test="remark1 != null">
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null">
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where feedid = #{feedid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tfs.entity.TeachFeedBack">
+    update teach_feedback
+    set feedperson = #{feedperson,jdbcType=INTEGER},
+      feedtitle = #{feedtitle,jdbcType=VARCHAR},
+      feedcontent = #{feedcontent,jdbcType=VARCHAR},
+      feeddate = #{feeddate,jdbcType=TIMESTAMP},
+      feedstatus = #{feedstatus,jdbcType=INTEGER},
+      feedisdelete = #{feedisdelete,jdbcType=BIT},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR}
+    where feedid = #{feedid,jdbcType=INTEGER}
+  </update>
+</mapper>
