@@ -135,33 +135,188 @@ Comparable<Integer>接口中有一个compareTo方法，返回int
             从git同步别人的代码（同步别人代码）
             廖雪峰：git专题
           4.开发自己的模块  （人对接）
-          5.下午：单元测试程序员做的。功能性测试，性能测试（对接其他岗位人员）
+          5.
+
+
+  下午：
+       下午：单元测试程序员做的。功能性测试，性能测试（对接其他岗位人员）
                  下班前新的版本。git
               git add  添加到暂存区
               git commit   从暂存区 踢人到 本地仓库
               git push    从本地仓库提交到git服务器
 
-
-
-  下午：
-
-
-  晚上：
-
-
-
-
-
+  晚上：调Bug，或者是有人习惯好的
+        任务的文档
+        定制明天的研发任务
 
 3.饼图---------讲解一下
 4.面试题录制视频任务
 
 
 
+dll:
+dynamic linked library
+动态链接库
 
 
+  public synchronized void start() {
+        /**
+         * This method is not invoked for the main method thread or "system"
+         * group threads created/set up by the VM. Any new functionality added
+         * to this method in the future may have to also be added to the VM.
+         *
+         * A zero status value corresponds to state "NEW".
+         */
+        if (threadStatus != 0)
+            throw new IllegalThreadStateException();
+
+        /* Notify the group that this thread is about to be started
+         * so that it can be added to the group's list of threads
+         * and the group's unstarted count can be decremented. */
+        group.add(this);
+
+        boolean started = false;
+        try {
+            start0();
+            started = true;
+        } finally {
+            try {
+                if (!started) {
+                    group.threadStartFailed(this);
+                }
+            } catch (Throwable ignore) {
+                /* do nothing. If start0 threw a Throwable then
+                  it will be passed up the call stack */
+            }
+        }
+    }
 
 
+	---------------------------------
+	 private native void start0();
+
+
+	 native是调度本地c++代码
+
+
+	 JDK
+	 JRE
+
+我们本来是想看Object的hashCode，翻看源码后发现，Ojbect的hashCode是本地方法，
+所有我们看了String的hashcode方法，原型如下：
+
+ public int hashCode() {
+        int h = hash;
+        if (h == 0 && value.length > 0) {
+            char val[] = value;
+
+            for (int i = 0; i < value.length; i++) {
+                h = 31 * h + val[i];
+            }
+            hash = h;
+        }
+        return h;
+    }
+
+-------------------------------------------------------------------
+1.Java虚拟机
+  JVM
+  JDK
+  JRE
+
+     JVM是JRE的一部分
+     JVM可以帮我们做内存管理
+
+     我们可以这样理解：当数据被放入JVM的时候，数据会被分解到不同的位置。
+
+  JVM运行时数据区
+     一个类加载到JVM中被分解到什么位置？？？
+     程序计数器：指向当前线程正在执行的字节码指令的地址和行号
+         https://blog.csdn.net/leaf_0303/article/details/78953669
+         https://www.cnblogs.com/thiaoqueen/p/8455521.html
+         CPU运行指令是抢占式的
+     虚拟机栈：存储当前线程运行方法所需要的数据，指令和返回地址
+          方法是由线程执行的
+
+      线程只是一个运行单位：
+      https://www.cnblogs.com/minisculestep/articles/4934947.html
+     方法区
+
+     http://blog.sina.com.cn/s/blog_b880bf2d0102vwa1.html
+     https://www.cnblogs.com/zuoxiaolong/p/jvm5.html
+     https://www.cnblogs.com/lewis0077/p/5143268.html
+     https://www.jianshu.com/p/76959115d486
+     https://www.cnblogs.com/jiyukai/p/6665199.html
+     https://blog.csdn.net/leaf_0303/article/details/78953669
+
+  JVM内存模型
+不错哇
+https://www.cnblogs.com/yulinfeng/p/5883668.html
+
+2019年5月9日08:31:37
+1.JVM
+  JDK
+  JRE
+2.运行时数据区 ------>Java内存结构
+                     Java内存模型
+
+  ----指令区  线程独享   线程安全的 。每个线程各持有一份
+  1。线程计数器  ------》记录地址（PDF，下一个指令的地址）
+  2.虚拟机栈 ----------》N个栈帧
+      栈帧 FILO First In  Last Out
+          1。成员变量表   int num=1; int num2=2;
+          2。操作数栈    int num3=num+num2;
+          3. 动态链接
+          4.返回结果
+  3.本地方法栈
+
+  -----数据区
+       方法区
+       堆
+ 方法区：
+   对于JVM的方法区，可能听得最多的是另外一个说法——永久代（Permanent Generation），
+   呼应堆的新生代和老年代。方法区和堆的划分是JVM规范的定义，而不同虚拟机有不同实现，
+   对于Hotspot虚拟机来说，将方法区纳入GC管理范围，这样就不必单独管理方法区的内存，所以就有了”永久代“这么一说。
+   方法区和操作系统进程的正文段（Text Segment）的作用非常类似，它存储的是已被虚拟机加载的类信息、常量
+   （从JDK7开始已经移至堆内存中）、静态变量等数据。现设置JVM参数为”-XX:MaxPermSize=20M”（方法区最大内存为20M）
+   。
+
+   方法区：类信息 Student.class  静态变量，常量，JIT中间代码
+
+  堆：对于堆（整个JVM中占用空间最大一块区域），Java程序员都知道对象实例以及数组内存都要在堆上分配。
+      堆不再被线程所独有而是共享的一块区域，它的确是用来存放对象实例，也是垃圾回收GC的主要区域。
+      实际上它还能细分为：新生代（Young Generation）、老年代（Old Generation）。
+      对于新生代又分为Eden空间、From Survivor空间、To Survivor空间。至于为什么这么分，
+      这涉及JVM的垃圾回收机制，在这里不做叙述。堆同样会抛出OOM异常，下面例子设置JVM参数”
+      -Xms20M -Xmx20M“（前者表示初始堆大小20M，后者表示最大堆大小20M）。
+
+-----------------------------------Java内存模型-JMM(Java Memory Model)----------------------------------------
+JMM是Java虚拟机的规范：
+用来指导Java内存结构如何去处理或者存放数据
+主内存(thread share)和工作内存(thread private)：
+
+　　Java内存模型的主要目标是定义程序中各个变量的访问规则，即在JVM中将变量存储到内存和从内存中取出
+变量这样的底层细节。
+    此处的变量与Java编程里面的变量有所不同，它包含了实例字段、静态字段和构成数组对象的元素，
+但不包含局部变量和方法参数，因为后者是线程私有的，不会共享，当然不存在数据竞争问题（如果局部变量
+是一个reference引用类型，它引用的对象在Java堆中可被各个线程共享，但是reference引用本身在Java栈
+的局部变量表中，是线程私有的）。为了获得较高的执行效能，Java内存模型并没有限制执行引起使用处理器
+的特定寄存器或者缓存来和主内存进行交互，也没有限制即时编译器进行调整代码执行顺序这类优化措施。
+
+    JMM规定了所有的变量都存储在主内存（Main Memory）中。每个线程还有自己的工作内存（Working Memory）,
+线程的工作内存中保存了该线程使用到的变量的主内存的副本拷贝，线程对变量的所有操作（读取、赋值等）
+都必须在工作内存中进行，而不能直接读写主内存中的变量（volatile变量仍然有工作内存的拷贝，
+但是由于它特殊的操作顺序性规定，所以看起来如同直接在主内存中读写访问一般）。
+不同的线程之间也无法直接访问对方工作内存中的变量，线程之间值的传递都需要通过主内存来完成。
+
+
+http://youzhixueyuan.com/jvm-garbage-collection-algorithm.html
+
+https://blog.csdn.net/qq_34337272/article/details/82177383
+
+
+内部类
+https://blog.csdn.net/weixin_39214481/article/details/80372676
 
 
 
