@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!--01.hibernate配置文件的根节点 -->
+<hibernate-configuration>
+    <!--会话工厂，构建会话，数据库服务器的会话-->
+    <session-factory>
+        <!-- Database connection settings  数据库连接设置-->
+        <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="connection.url">jdbc:oracle:thin:@//localhost/orcl</property>
+        <property name="connection.username">t23</property>
+        <property name="connection.password">t23</property>
+
+        <!-- JDBC connection pool (use the built-in) -->
+       <!-- <property name="connection.pool_size">1</property>-->
+
+        <!-- SQL dialect:方言 -->
+        <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
+
+        <!-- Enable Hibernate's automatic session context management -->
+        <!--property name="current_session_context_class">thread</property>-->
+
+        <!-- Disable the second-level cache  -->
+     <!--   <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>-->
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- Drop and re-create the database schema on startup
+         正向生成  User.hbm.xml  data define language
+
+        -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <mapping resource="cn/hibernate/day01/Student.hbm.xml"/>
+
+    </session-factory>
+
+</hibernate-configuration>
