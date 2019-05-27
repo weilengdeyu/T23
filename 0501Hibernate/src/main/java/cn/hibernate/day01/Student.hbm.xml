@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        <!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="cn.hibernate.day01">
-    <class name="Student" table="STUDENT">
-       <id name="id" column="ID">
-           <generator class="native"></generator>
-       </id>
-        <property name="name" column="NAME"></property>
-        <property name="age" column="AGE"></property>
-    </class>
+<class name="Student" table="STUDENT">
+    <id name="id" column="ID">
+        <!--和数据库保持一致：
+        数据支持序列：用序列赋值
+        数据库支持自增 ：自增赋值
+        -->
+        <generator class="native"></generator>
+    </id>
+    <property name="name" column="NAME"></property>
+    <property name="age" column="AGE"></property>
+</class>
 </hibernate-mapping>

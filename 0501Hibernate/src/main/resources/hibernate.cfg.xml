@@ -19,13 +19,13 @@
         <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
 
         <!-- Enable Hibernate's automatic session context management -->
-        <!--property name="current_session_context_class">thread</property>-->
+       <property name="current_session_context_class">thread</property>
 
         <!-- Disable the second-level cache  -->
      <!--   <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>-->
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
-
+        <property name="format_sql">true</property>
         <!-- Drop and re-create the database schema on startup
          正向生成  User.hbm.xml  data define language
 
@@ -33,7 +33,8 @@
         <property name="hbm2ddl.auto">update</property>
 
         <mapping resource="cn/hibernate/day01/Student.hbm.xml"/>
-
+        <mapping resource="cn/hibernate/day01/Teacher.hbm.xml"/>
+        <mapping resource="cn/hibernate/day01/Master.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>

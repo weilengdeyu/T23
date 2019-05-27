@@ -1,11 +1,9 @@
 import cn.hibernate.day01.Student;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,17 +16,31 @@ public class Day01Test {
     //查询学生  load  延迟加载
     @Test
     public void testAllStudent(){
+    /*    int[] chars={1,2,5,2};
+        int index = Arrays.binarySearch(chars,2);
+        System.out.println(index);*/
+
+
+
         //没有入参，默认会从classpath下加载名称为hibernate.cfg.xml文件
         Configuration config=new Configuration().configure();
         //02.构建工厂
         SessionFactory factory = config.buildSessionFactory();
         Session session = factory.openSession();
-        Query query = session.createQuery("select  name,age from Student"); //Linq
+        Criteria criteria = session.createCriteria(Student.class);
+        List<Student> list = criteria.list();
+        for (Student stu:list){
+            System.out.println(stu.getName());
+        }
+        /*Query query = session.createQuery("from Student");
+        List<Student> list = query.list();
+        System.out.println(list);*/
+       /* Query query = session.createQuery("select  name,age from Student"); //Linq
         List<Object[]> list = query.list();
         for (Object[] stu:list){
             System.out.println(stu[0]+"\t"+stu[1]);
 
-        }
+        }*/
     }
 
     //删除学生
